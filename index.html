@@ -401,24 +401,29 @@ const GIDS = {
   mixed:'2006988657', allsorts:'863533181', universal:'669456070'
 };
 
-let MEN = ["Alex Thomson","Andre Farrell","Andrew van Rensburg","Anthony Geldard","Arlin","Baron Wang","Bartjan Hooft","Benji","Billy Howes","Bonke","Brian Scott","Bruce Simelane","Carlos Rego","Charles Bethal","Chas Prettejohn","Chris Jackson","Cj Mentz","Colin Lovely","Conrad Chester","Coolant","Daniel Toro","Daryl McKenzie","Dean Wolverson","Derick Chester","Didi Hou","Eerfaan Dada","Graeme Guthrie","Grant Goldstone","Henry Jian","Ian Boyd","Ian McLoed","James Howes","Jeff Tseng","Jeremy Boyd","Jody Foss","Joe Roques","Khaya","Kim Roques","King Liu","Leo Chen","Luciano Ferreira","Mark Hunter","Matt Sprague","Mike Cutting","Mike Irwin","Mike Roach","Neil von Wissell","Phil Mayhew","Pierre Crous","Richard Cunningham","Richard Ferenczy","Richard Jarvis","Rob Jupp","Rob Reilly","Robbie James","Robert Chester","Roberto Russo","Ruan Beylefeld","Sandeep","Tarun","Sholto","Siya","Sizwe","Steve Packard","Stuart Hulley","Thulani","Tim Bertrand","Ward Young","William Lorentz","Wyn Evans"];
-let LADIES = ["Ally James","Angel","Angie lee","Anna Boyd","Ariel Liu","Bridget Farrell","Bron Evans","Carmen Guthrie","Charlene","Chereen Thomson","Chloe Thorne","Daniella Brink","Debbie Cutting","Debbie Hulley","Elmi Chester","Estelle Hamer","Hedy Hsu","Inge janse van Vuuren","Jeanine Van Wyk","Jen Boyd","Jen Sprague","Jess Hooft","Judy Curry","Judy Palmer","Julia Hulley","June McKenzie","Kate Reilly","Kerry Howes","Kim Nisbit","Kirsten Chester","Kirstie van Rensburg","Lucy McKenzie","Marisa Edwards","Mieka","Mishkah","Nadia Dada","Paloma Jupp","Philly","Rachel Bertrand","Robs Roques","Robyn","Robyn Jarvis","Sally James","Sam Farrell","Sarah Johnson","Seugnet","Shanni Chang","SJ Thomson","Stephanie Lin","Tina Lovely","Tracy McKenzie","Vanessa Jackson","Verne Von Wissell","Wendy Reed"];
+let MEN = [];
+let LADIES = [];
 
 async function loadPlayers() {
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GIDS.players}`;
-    const r = await fetch(url);
-    const text = await r.text();
-    const rows = text.trim().split('\n').slice(1);
-    const m=[], l=[];
-    rows.forEach(row => {
-      const cols = parseCSV(row);
-      const name = cols[0]?cols[0].replace(/^"|"$/g,'').trim():'';
-      const gender = cols[1]?cols[1].replace(/^"|"$/g,'').trim():'';
-      if(name && name!=='Name'){ if(gender==='M') m.push(name); else if(gender==='F') l.push(name); }
-    });
-    if(m.length>0) MEN=m.sort((a,b)=>a.localeCompare(b));
-    if(l.length>0) LADIES=l.sort((a,b)=>a.localeCompare(b));
+    const menUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${PIN_GIDS.mens}`;
+    const ladiesUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${PIN_GIDS.ladies}`;
+    const [mr, lr] = await Promise.all([fetch(menUrl), fetch(ladiesUrl)]);
+    const [mt, lt] = await Promise.all([mr.text(), lr.text()]);
+    const parseNames = (text) => {
+      const rows = text.trim().split('\n').slice(1);
+      const out = [];
+      rows.forEach(row => {
+        const cols = parseCSV(row);
+        const name = cols[0] ? cols[0].replace(/^"|"$/g,'').trim() : '';
+        if (name && name !== 'Name') out.push(name);
+      });
+      return out;
+    };
+    const m = parseNames(mt);
+    const l = parseNames(lt);
+    if (m.length > 0) MEN = m.sort((a,b)=>a.localeCompare(b));
+    if (l.length > 0) LADIES = l.sort((a,b)=>a.localeCompare(b));
   } catch(e){}
 }
 
