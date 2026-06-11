@@ -672,7 +672,6 @@ async function renderStep1(){
     <div class="field"><label>Event</label>
       <select id="matchEvent">
         <option value="">Select event...</option>
-        <option value="Social">Social</option>
       </select>
     </div>
     <div class="field"><label>Date</label><input type="date" id="matchDate" value="${today}"></div>
@@ -699,15 +698,15 @@ async function renderStep1(){
 }
 
 async function loadActiveTournaments(){
+  const sel=document.getElementById('matchEvent');
+  if(!sel) return;
+  let activeCount=0;
   try{
     const url=`https://docs.google.com/spreadsheets/d/${CONTROL_PANEL_ID}/export?format=csv&gid=0`;
     const r=await fetch(url);
     const text=await r.text();
     const rows=text.trim().split('\n').map(r=>parseCSV(r));
-    const sel=document.getElementById('matchEvent');
-    if(!sel) return;
     // Control Panel: names in col A (index 0), Active checkbox in col B (index 1), data from row 3 (index 2)
-    let activeCount=0;
     rows.slice(2).forEach(row=>{
       const name=(row[0]||'').trim();
       const active=(row[1]||'').trim().toUpperCase();
@@ -718,13 +717,14 @@ async function loadActiveTournaments(){
         activeCount++;
       }
     });
-    // Smart default: if no tournaments active, pre-select Social (frictionless).
-    // If tournaments are active, leave on "Select event..." to force a conscious choice.
-    if(activeCount===0){ sel.value='Social'; }
-  }catch(e){ /* if it fails, dropdown still has Select event / Social; default to Social for safety */
-    const sel=document.getElementById('matchEvent');
-    if(sel) sel.value='Social';
-  }
+  }catch(e){ /* if the fetch fails, we still add Social below */ }
+  // Always add Social at the BOTTOM, after any tournaments
+  const s=document.createElement('option');
+  s.value='Social'; s.textContent='Social';
+  sel.appendChild(s);
+  // Smart default: no active tournaments -> pre-select Social (frictionless).
+  // Tournaments active -> leave on "Select event..." to force a conscious choice.
+  if(activeCount===0){ sel.value='Social'; }
 }
 
 // Store recent matches globally for tap-to-expand
