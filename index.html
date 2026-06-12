@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>OPR-Rating Master</title>
+<title>OPR Kloof</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; min-height: 100vh; }
@@ -1042,7 +1042,7 @@ async function doSubmit(btn){
       <button class="btn btn-secondary" style="margin-top:8px;" onclick="goHome()">Back to Home</button>`;
     setStep(0);
   }catch(e){
-    document.getElementById('err4').textContent='Submission failed. Please try again.';
+    document.getElementById('err4').textContent='Network hiccup — your match may still have gone through. Check Recent Matches before submitting again to avoid a duplicate.';
     document.getElementById('err4').style.display='block';
     btn.textContent='\u2713 Submit Match';btn.disabled=false;
   }
