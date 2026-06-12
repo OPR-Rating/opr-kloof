@@ -23,12 +23,14 @@
   /* Home */
   .home-hero { background: #fff; padding: 16px 16px 0; text-align: center; }
   .screen-content.home-content { padding-top: 8px; }
-  .home-hero .hero-logo-panel { width: 100%; background: linear-gradient(135deg, #6C3483 0%, #5B3A9E 45%, #2E6DB4 100%); border-radius: 16px; padding: 24px 16px 20px; box-shadow: 0 6px 22px rgba(108,52,131,0.35), 0 0 30px rgba(46,109,180,0.18); color: #fff; }
-  .home-hero .ball-row { display: flex; align-items: center; justify-content: center; gap: 22px; }
+  .home-hero .hero-logo-panel { width: 100%; background: linear-gradient(135deg, #7D3C98 0%, #6C3483 35%, #5B3A9E 65%, #2E6DB4 100%); border-radius: 18px; padding: 26px 16px 22px; box-shadow: 0 6px 26px rgba(108,52,131,0.45), 0 0 40px rgba(46,109,180,0.25), inset 0 1px 0 rgba(255,255,255,0.15); color: #fff; position: relative; overflow: hidden; }
+  .home-hero .hero-logo-panel::before { content:''; position:absolute; top:-30px; right:-30px; width:120px; height:120px; background:radial-gradient(circle, rgba(241,196,15,0.25), transparent 70%); border-radius:50%; }
+  .home-hero .hero-logo-panel::after { content:''; position:absolute; bottom:-40px; left:-20px; width:140px; height:140px; background:radial-gradient(circle, rgba(46,109,180,0.3), transparent 70%); border-radius:50%; }
+  .home-hero .ball-row { display: flex; align-items: center; justify-content: center; gap: 22px; position: relative; z-index: 2; }
   .home-hero .ball-pair { display: inline-flex; align-items: center; gap: 8px; }
-  .home-hero .pball { width: 38px; height: 38px; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
-  .home-hero h2 { font-size: 24px; font-weight: 700; margin: 12px 0 4px; color: #fff; }
-  .home-hero p { font-size: 12px; opacity: 0.85; color: #fff; }
+  .home-hero .pball { width: 40px; height: 40px; display: block; filter: drop-shadow(0 0 8px rgba(241,196,15,0.4)) drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+  .home-hero h2 { font-size: 26px; font-weight: 800; margin: 12px 0 4px; color: #fff; position: relative; z-index: 2; text-shadow: 0 0 16px rgba(255,255,255,0.3); letter-spacing: 0.5px; }
+  .home-hero p { font-size: 12px; opacity: 0.9; color: #fff; position: relative; z-index: 2; }
   .opr-logo { font-size: 44px; margin-bottom: 10px; }
   .btn-enter { width: 100%; padding: 18px; background: linear-gradient(90deg, #6C3483, #8E44AD, #2E6DB4); color: #fff; border: none; border-radius: 14px; font-size: 18px; font-weight: 800; cursor: pointer; margin: 14px 0 12px; letter-spacing: 0.3px; box-shadow: 0 4px 14px rgba(108,52,131,0.35), 0 0 20px rgba(142,68,173,0.3); transition: transform 0.1s; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
   .btn-enter:active { transform: scale(0.98); }
@@ -228,10 +230,9 @@
       <div class="ladders-grid one-col">
         <button class="menu-btn" onclick="loadLadder('universal','Universal Rating')">Universal Ladder</button>
       </div>
-      <div class="ladders-group-title soon">Coming soon</div>
-      <div class="ladders-grid">
-        <button class="menu-btn soon" disabled>Performance</button>
-        <button class="menu-btn soon" disabled>Star Performer</button>
+      <div class="ladders-group-title">Form</div>
+      <div class="ladders-grid one-col">
+        <button class="menu-btn" style="border-color:#7D3C98;box-shadow:0 0 12px rgba(125,60,152,0.4);" onclick="loadFormWall('1448532059','Form')">Form Wall</button>
       </div>
     </div>
   </div>
@@ -286,6 +287,10 @@
         <button class="menu-btn" onclick="loadTournamentSheet('1MPJgWXbxyNAhe9kpPg4dxFnHhadDNkxPQN5teqSscQI','2006988657','Mixed Doubles Stats')">Mixed Doubles</button>
         <button class="menu-btn" onclick="loadTournamentSheet('1MPJgWXbxyNAhe9kpPg4dxFnHhadDNkxPQN5teqSscQI','863533181','All Sorts Stats')">All Sorts</button>
         <button class="menu-btn" style="grid-column:span 2;" onclick="loadTournamentSheet('1MPJgWXbxyNAhe9kpPg4dxFnHhadDNkxPQN5teqSscQI','669456070','Universal Stats')">Universal</button>
+      </div>
+      <div class="ladders-group-title">Tournament Form</div>
+      <div class="ladders-grid one-col">
+        <button class="menu-btn" style="border-color:#7D3C98;box-shadow:0 0 12px rgba(125,60,152,0.4);" onclick="loadTournamentSheet('1MPJgWXbxyNAhe9kpPg4dxFnHhadDNkxPQN5teqSscQI','1653680108','Tournament Form')">Form Wall</button>
       </div>
     </div>
   </div>
@@ -458,6 +463,37 @@ function goHome() {
   document.getElementById('homeScreen').classList.remove('hidden');
   document.getElementById('homeScreen').classList.add('active');
   if(recentMatchesData.length>0){ renderRecentList(); } else { loadRecent(); }
+}
+
+async function loadFormWall(gid, title) {
+  document.getElementById('ladderTitle').textContent = title;
+  document.getElementById('ladderContent').innerHTML = '<div class="loading"><span class="loading-spinner">⏳</span>Loading...</div>';
+  showScreen('ladderScreen');
+  try {
+    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
+    const resp = await fetch(url);
+    const text = await resp.text();
+    const rows = text.trim().split('\n');
+    if(rows.length<2){document.getElementById('ladderContent').innerHTML='<div class="empty-state"><div class="icon">🎾</div><p>No form data yet</p></div>';return;}
+    const headers = parseCSV(rows[0]);
+    const data = rows.slice(1).map(row=>parseCSV(row)).filter(row=>row[0]!=='');
+    let html = '<div style="padding:12px 14px;background:#f3eef8;border:1px solid #d7bde2;border-radius:10px;margin:0 12px 12px;font-size:12px;color:#5b3a6e;line-height:1.5;">';
+    html += '<strong>What is Form?</strong> Your overall performance — not just how often you win, but who you played, how convincingly, and how much. Minimum 12 sets to appear.</div>';
+    html += '<table class="ladder-table"><thead><tr><th>#</th>';
+    headers.forEach(h=>{html+=`<th>${h}</th>`;});
+    html+='</tr></thead><tbody>';
+    data.forEach((row,idx)=>{
+      const pos=idx+1;
+      const cls=pos===1?'rank-1':pos===2?'rank-2':pos===3?'rank-3':'';
+      html+='<tr><td><span class="rank-badge '+cls+'">'+pos+'</span></td>';
+      row.forEach(cell=>{ html+=`<td>${cell}</td>`; });
+      html+='</tr>';
+    });
+    html+='</tbody></table>';
+    document.getElementById('ladderContent').innerHTML=html;
+  } catch(e){
+    document.getElementById('ladderContent').innerHTML='<div class="empty-state"><div class="icon">⚠️</div><p>Could not load. Check connection.</p></div>';
+  }
 }
 
 async function loadLadder(type, title) {
