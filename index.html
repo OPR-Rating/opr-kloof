@@ -372,6 +372,7 @@
       <button class="back-btn" onclick="goHome()">&#8592;</button>
       <h1>Enter Score</h1>
     </div>
+    <div id="offlineBanner" style="display:none;background:#c0392b;color:#fff;text-align:center;padding:8px 12px;font-size:12px;font-weight:600;">⚠️ You are offline — scores cannot be submitted until you reconnect.</div>
     <div class="step-indicator">
       <div class="step-dot active" id="dot1"></div>
       <div class="step-dot" id="dot2"></div>
@@ -1065,6 +1066,11 @@ async function submitMatch(){
 }
 
 async function doSubmit(btn){
+  if(!navigator.onLine){
+    document.getElementById('err4').innerHTML='<strong>You are offline.</strong> Your score was <strong>NOT</strong> sent. Please reconnect to the internet and submit again — nothing has been saved yet.';
+    document.getElementById('err4').style.display='block';
+    return;
+  }
   btn.textContent='Submitting...';
   try{
     await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(entryData)});
@@ -1187,6 +1193,15 @@ function closePlayerModal() {
 }
 
 window.onload=function(){ loadRecent(); loadPlayers(); };
+</script>
+<script>
+function updateOfflineBanner(){
+  var b=document.getElementById('offlineBanner');
+  if(b) b.style.display = navigator.onLine ? 'none' : 'block';
+}
+window.addEventListener('online', updateOfflineBanner);
+window.addEventListener('offline', updateOfflineBanner);
+document.addEventListener('DOMContentLoaded', updateOfflineBanner);
 </script>
 </body>
 </html>
