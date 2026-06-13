@@ -16,7 +16,7 @@
   .app { max-width: 480px; margin: 0 auto; background: #fff; min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; position: relative; }
 
   /* Header */
-  .header { background: #6C3483; color: white; padding: 14px 20px; display: flex; align-items: center; gap: 12px; min-height: 56px; }
+  .header { background:url("header_bg2.png") center center/cover no-repeat; color: white; padding: 16px 20px; display: flex; align-items: center; gap: 12px; min-height: 64px; text-shadow:0 2px 6px rgba(0,0,0,0.45); }
   .header h1 { font-size: 18px; font-weight: 600; flex: 1; }
   .back-btn { background: none; border: none; color: white; font-size: 22px; cursor: pointer; padding: 4px 8px 4px 0; }
 
@@ -27,9 +27,9 @@
   .screen-content { flex: 1; overflow-y: auto; padding: 16px; }
 
   /* Home */
-  .home-hero { background: #fff; padding: 16px 16px 0; text-align: center; }
-  .screen-content.home-content { padding-top: 8px; }
-  .home-hero .hero-logo-panel { width: 100%; background: linear-gradient(135deg, #7D3C98 0%, #6C3483 35%, #5B3A9E 65%, #2E6DB4 100%); border-radius: 18px; padding: 26px 16px 22px; box-shadow: 0 6px 26px rgba(108,52,131,0.45), 0 0 40px rgba(46,109,180,0.25), inset 0 1px 0 rgba(255,255,255,0.15); color: #fff; position: relative; overflow: hidden; }
+  .home-hero { background:url("header_bg2.png") center center / cover no-repeat; padding:0; margin:0; text-align:center; position:relative; }
+  .screen-content.home-content { padding-top: 0; margin-top: -26px; position: relative; z-index: 5; }
+  .home-hero .hero-logo-panel { display:block; width:100%; margin:0; background:transparent; border-radius:0; padding:42px 16px 40px; color:#fff; position:relative; }
   .home-hero .hero-logo-panel::before { content:''; position:absolute; top:-30px; right:-30px; width:120px; height:120px; background:radial-gradient(circle, rgba(241,196,15,0.25), transparent 70%); border-radius:50%; }
   .home-hero .hero-logo-panel::after { content:''; position:absolute; bottom:-40px; left:-20px; width:140px; height:140px; background:radial-gradient(circle, rgba(46,109,180,0.3), transparent 70%); border-radius:50%; }
   .home-hero .ball-row { display: flex; align-items: center; justify-content: center; gap: 22px; position: relative; z-index: 2; }
@@ -38,7 +38,7 @@
   .home-hero h2 { font-size: 26px; font-weight: 800; margin: 12px 0 4px; color: #fff; position: relative; z-index: 2; text-shadow: 0 0 16px rgba(255,255,255,0.3); letter-spacing: 0.5px; }
   .home-hero p { font-size: 12px; opacity: 0.9; color: #fff; position: relative; z-index: 2; }
   .opr-logo { font-size: 44px; margin-bottom: 10px; }
-  .btn-enter { width: 100%; padding: 18px; background: linear-gradient(90deg, #6C3483, #8E44AD, #2E6DB4); color: #fff; border: none; border-radius: 14px; font-size: 18px; font-weight: 800; cursor: pointer; margin: 14px 0 12px; letter-spacing: 0.3px; box-shadow: 0 4px 14px rgba(108,52,131,0.35), 0 0 20px rgba(142,68,173,0.3); transition: transform 0.1s; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+  .btn-enter { width: 100%; padding: 19px; background: linear-gradient(180deg, #F4C430, #E3AC00); color: #1a1300; border: none; border-radius: 14px; font-size: 18px; font-weight: 800; cursor: pointer; margin: 0 0 14px; position: relative; z-index: 5; letter-spacing: 0.3px; box-shadow: 0 10px 26px rgba(150,100,0,0.45), inset 0 1px 0 rgba(255,255,255,0.55); transition: transform 0.1s; }
   .btn-enter:active { transform: scale(0.98); }
   .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
   .menu-btn { padding: 14px 8px; background: #fff; border: 1.5px solid #1a1a1a; border-radius: 12px; font-size: 13px; font-weight: 600; color: #1a1a1a; cursor: pointer; text-align: center; transition: all 0.15s; display: flex; align-items: center; justify-content: center; min-height: 52px; }
@@ -55,7 +55,7 @@
 
   /* Ladder */
   .ladder-table { width: auto; min-width: 100%; border-collapse: collapse; font-size: 12px; table-layout: auto; margin: 0; }
-  .ladder-table th { background: #6C3483; color: white; padding: 8px 10px; text-align: center; font-size: 11px; font-weight: 600; position: sticky; top: 0; white-space: nowrap; }
+  .ladder-table th { background: #3a1d6e; color: white; padding: 8px 10px; text-align: center; font-size: 11px; font-weight: 600; position: sticky; top: 0; white-space: nowrap; }
   .ladder-table th:first-child { text-align: left !important; padding-left: 4px; padding-right: 4px; }
   .ladder-table th:nth-child(2) { text-align: left !important; }
   .ladder-table td { padding: 7px 12px; border-bottom: 1px solid #f0f0f0; white-space: nowrap; text-align: center; }
@@ -322,7 +322,7 @@
     </div>
     <div class="screen-content">
       <div class="about-hero">
-        <div style="font-size:30px;margin-bottom:8px;letter-spacing:4px;">🎾 🎾 🎾 🎾</div>
+        <div style="margin-bottom:10px;"><span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E8F58A,#C5E86C 45%,#9DBE3C);box-shadow:0 0 12px rgba(180,230,90,0.6),inset -2px -2px 5px rgba(120,150,40,0.5),inset 2px 2px 3px rgba(255,255,255,0.6);border:1.5px solid rgba(200,160,40,0.5);margin:0 5px;"></span><span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E8F58A,#C5E86C 45%,#9DBE3C);box-shadow:0 0 12px rgba(180,230,90,0.6),inset -2px -2px 5px rgba(120,150,40,0.5),inset 2px 2px 3px rgba(255,255,255,0.6);border:1.5px solid rgba(200,160,40,0.5);margin:0 5px;"></span><span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E8F58A,#C5E86C 45%,#9DBE3C);box-shadow:0 0 12px rgba(180,230,90,0.6),inset -2px -2px 5px rgba(120,150,40,0.5),inset 2px 2px 3px rgba(255,255,255,0.6);border:1.5px solid rgba(200,160,40,0.5);margin:0 5px;"></span><span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E8F58A,#C5E86C 45%,#9DBE3C);box-shadow:0 0 12px rgba(180,230,90,0.6),inset -2px -2px 5px rgba(120,150,40,0.5),inset 2px 2px 3px rgba(255,255,255,0.6);border:1.5px solid rgba(200,160,40,0.5);margin:0 5px;"></span></div>
         <h2>Open Padel Rating</h2>
         <p>Designed for All Sorts of Combined pairings</p>
       </div>
@@ -420,8 +420,8 @@ let LADIES = [];
 
 async function loadPlayers() {
   try {
-    const menUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${PIN_GIDS.mens}`;
-    const ladiesUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${PIN_GIDS.ladies}`;
+    const menUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${PIN_GIDS.mens}&t=${Date.now()}`;
+    const ladiesUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${PIN_GIDS.ladies}&t=${Date.now()}`;
     const [mr, lr] = await Promise.all([fetch(menUrl), fetch(ladiesUrl)]);
     const [mt, lt] = await Promise.all([mr.text(), lr.text()]);
     const parseNames = (text) => {
@@ -479,22 +479,20 @@ async function loadFormWall(gid, title) {
   document.getElementById('ladderContent').innerHTML = '<div class="loading"><span class="loading-spinner">⏳</span>Loading...</div>';
   showScreen('ladderScreen');
   try {
-    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
+    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}&t=${Date.now()}`;
     const resp = await fetch(url);
     const text = await resp.text();
     const rows = text.trim().split('\n');
     if(rows.length<2){document.getElementById('ladderContent').innerHTML='<div class="empty-state"><div class="icon">🎾</div><p>No form data yet</p></div>';return;}
     const headers = parseCSV(rows[0]);
     const data = rows.slice(1).map(row=>parseCSV(row)).filter(row=>row[0]!=='');
-    let html = '<div style="padding:12px 14px;background:#f3eef8;border:1px solid #d7bde2;border-radius:10px;margin:0 12px 12px;font-size:12px;color:#5b3a6e;line-height:1.5;">';
+    let html = '<div style="padding:12px 14px;background:#f3eef8;border:1px solid #d7bde2;border-radius:10px;margin:14px 12px 12px;font-size:12px;color:#5b3a6e;line-height:1.5;">';
     html += '<strong>What is Form?</strong> Your overall performance — not just how often you win, but who you played, how convincingly, and how by much. Requires a minimum of 12 sets to appear.</div>';
-    html += '<table class="ladder-table"><thead><tr><th>#</th>';
+    html += '<table class="ladder-table"><thead><tr>';
     headers.forEach(h=>{html+=`<th>${h}</th>`;});
     html+='</tr></thead><tbody>';
     data.forEach((row,idx)=>{
-      const pos=idx+1;
-      const cls=pos===1?'rank-1':pos===2?'rank-2':pos===3?'rank-3':'';
-      html+='<tr><td><span class="rank-badge '+cls+'">'+pos+'</span></td>';
+      html+='<tr>';
       row.forEach(cell=>{ html+=`<td>${cell}</td>`; });
       html+='</tr>';
     });
@@ -513,7 +511,7 @@ async function loadLadder(type, title) {
   try {
     const gidMap={'mens':'552393349','ladies':'1092914270','mensdoubles':'1535335554','ladiesdoubles':'1779361555','mixed':'2006988657','allsorts':'863533181','universal':'669456070'};
     const gid=gidMap[type]||GIDS[type];
-    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
+    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}&t=${Date.now()}`;
     const resp = await fetch(url);
     const text = await resp.text();
     const rows = text.trim().split('\n');
@@ -553,14 +551,18 @@ async function loadTournamentSheet(sheetId, gid, title) {
   showScreen('tournamentSheetScreen');
   document.getElementById('tournamentSheetTitle').textContent = title;
   try {
-    const url=`https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+    const url=`https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}&t=${Date.now()}`;
     const resp = await fetch(url);
     const text = await resp.text();
     const rows = text.trim().split('\n');
     if(rows.length<2){document.getElementById('tournamentSheetContent').innerHTML='<div class="empty-state"><div class="icon">🎾</div><p>No data yet</p></div>';return;}
     const headers = parseCSV(rows[0]);
     const data = rows.slice(1).map(row=>parseCSV(row)).filter(row=>row.some(c=>c&&c.trim()!==''));
-    let html = '<table class="ladder-table"><thead><tr>';
+    let html = '';
+    if(/form/i.test(title)){
+      html += '<div style="padding:12px 14px;background:#f3eef8;border:1px solid #d7bde2;border-radius:10px;margin:14px 12px 12px;font-size:12px;color:#5b3a6e;line-height:1.5;"><strong>What is Form?</strong> Your overall performance — not just how often you win, but who you played, how convincingly, and how by much. Requires a minimum of 12 sets to appear.</div>';
+    }
+    html += '<table class="ladder-table"><thead><tr>';
     headers.forEach(h=>{html+=`<th>${h}</th>`;});
     html+='</tr></thead><tbody>';
     data.forEach(row=>{
@@ -619,7 +621,7 @@ async function loadProfile(name, gender) {
   try {
     const isMen = gender==='M';
     const gid = isMen?GIDS.mens:GIDS.ladies;
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}&t=${Date.now()}`;
     const r = await fetch(url);
     const text = await r.text();
     const rows = text.trim().split('\n').slice(1);
@@ -637,7 +639,7 @@ async function loadProfile(name, gender) {
     const setWinPct = playerRow?playerRow[6]:'-';
 
     // Match history
-    const matchUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GIDS.submissions}`;
+    const matchUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GIDS.submissions}&t=${Date.now()}`;
     let matchHTML = '';
     try {
       const mr = await fetch(matchUrl);
@@ -752,7 +754,7 @@ async function loadActiveTournaments(){
   if(!sel) return;
   let activeCount=0;
   try{
-    const url=`https://docs.google.com/spreadsheets/d/${CONTROL_PANEL_ID}/export?format=csv&gid=0`;
+    const url=`https://docs.google.com/spreadsheets/d/${CONTROL_PANEL_ID}/export?format=csv&gid=0&t=${Date.now()}`;
     const r=await fetch(url);
     const text=await r.text();
     const rows=text.trim().split('\n').map(r=>parseCSV(r));
@@ -782,7 +784,7 @@ let recentMatchesData = [];
 
 async function loadRecent(){
   try{
-    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GIDS.submissions}`;
+    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GIDS.submissions}&t=${Date.now()}`;
     const r=await fetch(url);
     const text=await r.text();
     const rows=text.trim().split('\n').slice(1).map(r=>parseCSV(r)).filter(r=>{
@@ -830,7 +832,7 @@ async function toggleRecent(idx){
     // Look up set scores from Submissions tab by matching date and players
     let setScoresHTML='';
     try{
-      const subUrl=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=1534372635`;
+      const subUrl=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=1534372635&t=${Date.now()}`;
       const sr=await fetch(subUrl);
       const st=await sr.text();
       const subRows=st.trim().split('\n').slice(1).map(r=>parseCSV(r));
@@ -1055,7 +1057,7 @@ async function submitMatch(){
   try{
     const isMen=MEN.includes(submitter);
     const dataGid=isMen?PIN_GIDS.mens:PIN_GIDS.ladies;
-    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${dataGid}`;
+    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${dataGid}&t=${Date.now()}`;
     const r=await fetch(url);
     const text=await r.text();
     const rows=text.trim().split('\n').slice(1).map(row=>parseCSV(row));
@@ -1112,7 +1114,7 @@ async function toggleProfileMatch(idx){
     // Look up set scores from Submissions tab
     let scoresHTML='';
     try{
-      const subUrl=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=1534372635`;
+      const subUrl=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=1534372635&t=${Date.now()}`;
       const sr=await fetch(subUrl);
       const st=await sr.text();
       const subRows=st.trim().split('\n').slice(1).map(r=>parseCSV(r));
